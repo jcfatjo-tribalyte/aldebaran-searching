@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { AppConfig } from './app.config';
 
 @Component({
     selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    title = 'aldebaran-searching';
+
+    constructor(
+        private translateService: TranslateService
+    ) {
+        this.initTranslation();
+    }
+
+    private initTranslation() {
+        this.translateService.setDefaultLang(AppConfig.DEFAULT_LANGUAGE);
+        this.translateService.use(AppConfig.DEFAULT_LANGUAGE);
+    }
 }
