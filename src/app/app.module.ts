@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -9,6 +10,8 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppConfig } from './app.config';
 import { LoggerService } from './services/logger.service';
@@ -28,6 +31,7 @@ export function httpLoaderFactory(http: HttpClient) {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        ReactiveFormsModule,
         HttpClientModule,
         TranslateModule.forRoot({
             loader: {
@@ -42,7 +46,9 @@ export function httpLoaderFactory(http: HttpClient) {
             timestampFormat: 'short'
         }),
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatCardModule,
+        MatButtonModule
     ],
     providers: [
         AppConfig,

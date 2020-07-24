@@ -1,4 +1,11 @@
-<mat-form-field>
-    <mat-label>{{ 'vatId' | translate }}</mat-label>
-    <input matInput type="text">
-</mat-form-field>
+<section class="search-container">
+    <mat-card class="search-form-wrapper">
+        <form class="search-form" [formGroup]="searchForm" (ngSubmit)="searchCompany()">
+            <mat-form-field class="form-field">
+                <mat-label>{{ 'vatId' | translate }}</mat-label>
+                <input matInput type="text" formControlName="vatId" [placeholder]="'companyVat' | translate">
+            </mat-form-field>
+            <button mat-raised-button class="submit-button" type="submit" color="primary">{{ 'search' | translate }}</button>
+        </form>
+    </mat-card>
+</section>

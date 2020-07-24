@@ -1,3 +1,5 @@
 {
-    "vatId": "VAT ID"
+    "vatId": "VAT ID",
+    "companyVat": "VAT de empresa",
+    "search": "Buscar"
 }
