@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { AppConfig } from '../app.config';
 import { ILogger, LoggerService } from './logger.service';
 import { AuthModel } from '../models/auth.model';
 import { CompanyFileModel } from '../models/company-file.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ export class ApiService {
 
     constructor(
         private http: HttpClient,
+        private matSnackBar: MatSnackBar,
         loggerService: LoggerService
     ) {
         this.log = loggerService.getLogger('AuthService');
@@ -38,7 +40,22 @@ export class ApiService {
         return this.http.post(AppConfig.API_AUTH_URL, requestBody, {
             headers: requestHeaders
         }).pipe(
-            catchError(this.handleError),
+            catchError(error => {
+                if (error.error instanceof ErrorEvent) {
+                    this.log.e('An error occurred:', error.error.message);
+                } else {
+                    this.log.e(`Backend returned code ${error.status}, body was:`, error.error);
+                }
+
+                this.matSnackBar.open(error.error.message, '', {
+                    duration: 3000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    panelClass: 'error-alert'
+                });
+
+                return throwError('Something bad happened; please try again later.');
+            }),
             tap((resp: AuthModel) => {
                 this.log.d('Auth result:', resp);
 
@@ -59,19 +76,25 @@ export class ApiService {
         return this.http.get(AppConfig.API_SEARCH_URL + vatId + AppConfig.API_SEARCH_TYPE, {
             headers: requestHeaders
         }).pipe(
-            catchError(this.handleError),
+            catchError(error => {
+                if (error.error instanceof ErrorEvent) {
+                    this.log.e('An error occurred:', error.error.message);
+                } else {
+                    this.log.e(`Backend returned code ${error.status}, body was:`, error.error);
+                }
+
+                this.matSnackBar.open(error.error.message, '', {
+                    duration: 3000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    panelClass: 'error-alert'
+                });
+
+                return throwError('Something bad happened; please try again later.');
+            }),
             tap((resp: CompanyFileModel) => {
                 this.log.d('Search result:', resp);
             })
         );
-    }
-
-    private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-            console.error('An error occurred:', error.error.message);
-        } else {
-            console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
-        }
-        return throwError('Something bad happened; please try again later.');
     }
 }

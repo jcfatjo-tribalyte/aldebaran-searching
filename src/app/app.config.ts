@@ -1,7 +1,3 @@
-import { environment } from '../environments/environment';
-
-const IS_PROD_ENVIRONMENT = environment.production;
-
 export class AppConfig {
 
     public static readonly API_AUTH_URL = 'https://developers.einforma.com/api/v1/oauth/token';

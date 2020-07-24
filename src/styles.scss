@@ -28,3 +28,8 @@ body {
 .text-bold {
     font-weight: bold;
 }
+
+.error-alert {
+    color: white;
+    background-color: mat-color($aldebaran-searching-warn);
+}
