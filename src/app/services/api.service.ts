@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { ILogger, LoggerService } from './logger.service';
+import { catchError, map, tap } from 'rxjs/operators';
 import { AppConfig } from '../app.config';
+import { ILogger, LoggerService } from './logger.service';
+import { AuthModel } from '../models/auth.model';
+import { CompanyFileModel } from '../models/company-file.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +24,8 @@ export class ApiService {
     }
 
     public init(): Observable<any> {
+        this.log.d('Initiating API auth.');
+
         const requestBody = AppConfig.API_AUTH_BODY.map(bodyElement => {
             return bodyElement.NAME + '=' + bodyElement.VALUE;
         }).join('&');
@@ -35,11 +39,29 @@ export class ApiService {
             headers: requestHeaders
         }).pipe(
             catchError(this.handleError),
-            map(resp => {
-                this.log.d('Auth params:', resp);
+            tap((resp: AuthModel) => {
+                this.log.d('Auth result:', resp);
 
                 this.authToken = resp['access_token'];
                 this.tokenType = resp['token_type'];
+            })
+        );
+    }
+
+    public getCompanyByVat(vatId: string): Observable<any> {
+        this.log.d('Getting company by VAT ID');
+
+        const requestHeaders = new HttpHeaders({
+            accept: AppConfig.API_AUTH_HEADERS.ACCEPT,
+            authorization: [this.tokenType, this.authToken].join(' ')
+        });
+
+        return this.http.get(AppConfig.API_SEARCH_URL + vatId + AppConfig.API_SEARCH_TYPE, {
+            headers: requestHeaders
+        }).pipe(
+            catchError(this.handleError),
+            tap((resp: CompanyFileModel) => {
+                this.log.d('Search result:', resp);
             })
         );
     }

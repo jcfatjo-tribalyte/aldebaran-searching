@@ -12,6 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppConfig } from './app.config';
 import { LoggerService } from './services/logger.service';
@@ -48,7 +50,9 @@ export function httpLoaderFactory(http: HttpClient) {
         MatFormFieldModule,
         MatInputModule,
         MatCardModule,
-        MatButtonModule
+        MatButtonModule,
+        MatListModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         AppConfig,

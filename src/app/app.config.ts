@@ -23,5 +23,8 @@ export class AppConfig {
         CONTENT_TYPE: 'application/x-www-form-urlencoded'
     };
 
+    public static readonly API_SEARCH_URL = 'https://developers.einforma.com/api/v1/companies/';
+    public static readonly API_SEARCH_TYPE = '/test';
+
     public static readonly DEFAULT_LANGUAGE = 'es';
 }

@@ -1,5 +1,27 @@
 {
     "vatId": "VAT ID",
     "companyVat": "VAT de empresa",
-    "search": "Buscar"
+    "search": "Buscar",
+    "emptyMessage": "Busque una empresa por su VAT ID",
+    "companyFields": {
+        "denominacion": "Denominación",
+        "nombreComercial": "Nombre comercial",
+        "domicilioSocial":  "Domicilio social",
+        "localidad": "Localidad",
+        "formaJuridica":  "Forma juridica",
+        "cnae": "Cnae",
+        "fechaUltimoBalance":  "Fecha del último balance",
+        "identificativo": "Identificativo",
+        "situacion":  "Situación",
+        "telefono": "Telefono",
+        "fax":  "Fax",
+        "web": "Webs",
+        "email":  "Email",
+        "cargoPrincipal": "Cargo principal",
+        "capitalSocial":  "Capital social",
+        "ventas": "Número de ventas",
+        "anioVentas":  "Número de ventas (anual)",
+        "empleados": "Número de empleados",
+        "fechaConstitucion":  "Fecha de Constitucion"
+    }
 }

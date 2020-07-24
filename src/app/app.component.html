@@ -8,4 +8,24 @@
             <button mat-raised-button class="submit-button" type="submit" color="primary">{{ 'search' | translate }}</button>
         </form>
     </mat-card>
+    <mat-card class="search-result-wrapper">
+        <section *ngIf="company$ | async as company; else empty" class="search-result">
+            <mat-selection-list *ngIf="!isLoading; else loading" [multiple]="false" class="result-list">
+                <mat-list-option *ngFor="let companyField of COMPANY_FIELDS">
+                    <p>
+                        <span class="text-bold">{{ (('companyFields.' + companyField) | translate) + ': ' }}</span>
+                        <span>{{ company[companyField] }}</span>
+                    </p>
+                </mat-list-option>
+            </mat-selection-list>
+            <ng-template #loading>
+                <section class="spinner-wrapper">
+                    <mat-spinner diameter="32" color="accent"></mat-spinner>
+                </section>
+            </ng-template>
+        </section>
+        <ng-template #empty>
+            {{ 'emptyMessage' | translate }}
+        </ng-template>
+    </mat-card>
 </section>
