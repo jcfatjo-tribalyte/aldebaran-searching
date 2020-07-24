@@ -3,6 +3,16 @@
     padding: 8px;
     width: 100%;
 
+    .search-brand-wrapper {
+        width: 100%;
+        text-align: center;
+
+        .search-brand {
+            width: 100px;
+            height: auto;
+        }
+    }
+
     .search-form-wrapper {
         .search-form {
             display: flex;

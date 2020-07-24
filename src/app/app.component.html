@@ -1,4 +1,8 @@
 <section class="search-container">
+    <section class="search-brand-wrapper">
+        <img class="search-brand" src="assets/images/Logo_PNG.webp" alt="Aldebaran Searching">
+        <p>{{ 'page-title' | translate }}</p>
+    </section>
     <mat-card class="search-form-wrapper">
         <form class="search-form" [formGroup]="searchForm" (ngSubmit)="searchCompany()">
             <mat-form-field class="form-field">
