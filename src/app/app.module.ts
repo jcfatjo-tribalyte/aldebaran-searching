@@ -12,9 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 
 import { AppConfig } from './app.config';
 import { LoggerService } from './services/logger.service';
+import { ApiService } from './services/api.service';
 
 import { AppComponent } from './app.component';
-
 import { environment } from '../environments/environment';
 
 export function httpLoaderFactory(http: HttpClient) {
@@ -46,7 +46,8 @@ export function httpLoaderFactory(http: HttpClient) {
     ],
     providers: [
         AppConfig,
-        LoggerService
+        LoggerService,
+        ApiService
     ],
     bootstrap: [
         AppComponent
